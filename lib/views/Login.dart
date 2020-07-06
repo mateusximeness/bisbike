@@ -8,17 +8,22 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100.0),
+        child: AppBar(
+          centerTitle: true ,
+          automaticallyImplyLeading: false, // hides leading widget
+          backgroundColor: Colors.white,
+          title: Image(
+            image: NetworkImage('https://i.imgur.com/qMfGTm2.png',scale: 15 ),
+          ),
 
-      appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
-        title: Text("BisBike"),
+        ),
       ),
       body: Column(
+
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Image(
-            image: NetworkImage('https://i.imgur.com/qMfGTm2.png',),
-          ),
           Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
@@ -26,6 +31,7 @@ class Login extends StatelessWidget {
                 style: TextStyle(fontSize: 16.0),
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
+                  icon: Icon(Icons.person),
                   labelText: 'Email ou nome de usuario',
                   hintText: 'exemplo@gmail.com ou nome de usuario',
                 ),
@@ -38,22 +44,27 @@ class Login extends StatelessWidget {
                 keyboardType: TextInputType.visiblePassword,
                 obscureText: true,
                 decoration: InputDecoration(
+                  icon: Icon(Icons.lock),
                   labelText: 'Senha de usuario',
-                  hintText: '*********',
+                  hintText: 'Digite sua senha',
                 ),
               )),
           RaisedButton(
+            color: Colors.deepPurpleAccent,
+            textColor: Colors.white,
             onPressed: () {
               final result =startLogin(context);
               debugPrint("$result");
             },
 
-            child: const Text('Realizar Login', style: TextStyle(fontSize: 20)),
+            child: const Text('Login', style: TextStyle(fontSize: 20)),
           ),
           RaisedButton(
+            textColor: Colors.white,
+            color: Colors.deepPurple,
             onPressed: () {
             },
-            child: const Text('Cadastrar Usuario', style: TextStyle(fontSize: 20)),
+            child: const Text('Cadastro', style: TextStyle(fontSize: 20)),
           ),
         ],
       ),
