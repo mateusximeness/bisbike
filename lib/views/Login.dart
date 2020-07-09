@@ -1,4 +1,6 @@
 import 'package:bisbike/models/UserLogin.dart';
+import 'package:bisbike/views/Cadastro.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
@@ -22,7 +24,7 @@ class Login extends StatelessWidget {
       ),
       body: Column(
 
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
               padding: const EdgeInsets.all(16.0),
@@ -33,7 +35,7 @@ class Login extends StatelessWidget {
                 decoration: InputDecoration(
                   icon: Icon(Icons.person),
                   labelText: 'Email ou nome de usuario',
-                  hintText: 'exemplo@gmail.com ou nome de usuario',
+                  hintText: 'Email ou Usuário',
                 ),
               )),
           Padding(
@@ -50,19 +52,25 @@ class Login extends StatelessWidget {
                 ),
               )),
           RaisedButton(
-            color: Colors.deepPurpleAccent,
+            color: Colors.deepPurple,
             textColor: Colors.white,
             onPressed: () {
               final result =startLogin(context);
               debugPrint("$result");
             },
 
-            child: const Text('Login', style: TextStyle(fontSize: 20)),
+            child: const Text('Entrar', style: TextStyle(fontSize: 20)),
           ),
           RaisedButton(
             textColor: Colors.white,
             color: Colors.deepPurple,
             onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Cadastro()
+                  )
+              );
             },
             child: const Text('Cadastro', style: TextStyle(fontSize: 20)),
           ),
@@ -74,8 +82,8 @@ class Login extends StatelessWidget {
   bool startLogin(BuildContext context) {
     final String usernameEmail = _controladorUserName.text;
     final String password = _controladorPassword.text;
-    debugPrint("$usernameEmail");
-    debugPrint("$password");
+    debugPrint("Login: $usernameEmail");
+    debugPrint("Senha: $password");
     if (!usernameEmail.isEmpty && !password.isEmpty){
       final userLogin = UserLogin(usernameEmail, password);
       return true;
