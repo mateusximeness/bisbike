@@ -25,6 +25,7 @@ class _CadastroState extends State<Cadastro> {
             Padding(
               padding: const EdgeInsets.fromLTRB(10,20,15,10),
                 child: TextField(
+                  keyboardType: TextInputType.emailAddress,
                   style: TextStyle(fontSize: 16.0),
                   decoration: InputDecoration(
                     icon: Icon(Icons.person),
