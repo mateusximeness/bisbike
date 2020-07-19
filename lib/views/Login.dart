@@ -1,17 +1,19 @@
+import 'package:bisbike/business/LoginService.dart';
 import 'package:bisbike/models/UserLogin.dart';
 import 'package:bisbike/views/Cadastro.dart';
+import 'package:bisbike/views/_PaginaInicial.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
   final TextEditingController _controladorUserName = TextEditingController();
   final TextEditingController _controladorPassword = TextEditingController();
-
+  final LoginService loginService = LoginService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.0),
+        preferredSize: Size.fromHeight(60.0),
         child: AppBar(
           centerTitle: true ,
           automaticallyImplyLeading: false, // hides leading widget
@@ -56,6 +58,14 @@ class Login extends StatelessWidget {
             textColor: Colors.white,
             onPressed: () {
               final result =startLogin(context);
+              if(result)
+                Navigator.pushReplacement (
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PaginaInicial()
+                    )
+                );
+
               debugPrint("$result");
             },
 
@@ -80,13 +90,11 @@ class Login extends StatelessWidget {
   }
 
   bool startLogin(BuildContext context) {
-    final String usernameEmail = _controladorUserName.text;
+    final String userNameEmail = _controladorUserName.text;
     final String password = _controladorPassword.text;
-    debugPrint("Login: $usernameEmail");
-    debugPrint("Senha: $password");
-    if (!usernameEmail.isEmpty && !password.isEmpty){
-      final userLogin = UserLogin(usernameEmail, password);
-      return true;
+
+    if (userNameEmail.isNotEmpty && password.isNotEmpty){
+      return loginService.validaLogin(userNameEmail, password);
     } else {
       return false;
     }
