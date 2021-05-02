@@ -1,3 +1,4 @@
+import 'package:bisbike/views/Login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -54,7 +55,14 @@ class _CodigoState extends State<Codigo> {
                 ),
               ),
               color: Colors.deepPurple,
-              onPressed: () {}
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Login()
+                    )
+                );
+               }
               )
         ],
       ),
